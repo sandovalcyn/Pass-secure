@@ -1,0 +1,27 @@
+import random
+import string
+
+def generar_contraseña(longitud=12):
+    # Definir los caracteres posibles para la contraseña
+    caracteres = string.ascii_letters + string.digits + string.punctuation
+    
+    # Garantizar que haya al menos un carácter de cada tipo
+    contraseña = [
+        random.choice(string.ascii_uppercase),  # Al menos una letra mayúscula
+        random.choice(string.ascii_lowercase),  # Al menos una letra minúscula
+        random.choice(string.digits),           # Al menos un número
+        random.choice(string.punctuation)       # Al menos un símbolo
+    ]
+    
+    # Completar el resto de la contraseña con caracteres aleatorios
+    contraseña += random.choices(caracteres, k=longitud-4)
+    
+    # Mezclar los caracteres para asegurar la aleatoriedad
+    random.shuffle(contraseña)
+    
+    # Unir la lista en una cadena y devolverla
+    return ''.join(contraseña)
+
+# Generar una contraseña segura de 12 caracteres (por defecto)
+contraseña_segura = generar_contraseña()
+print("Tu contraseña segura es:", contraseña_segura)
